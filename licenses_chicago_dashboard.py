@@ -24,7 +24,7 @@ if non_black_license_df.shape[0] <= black_license_df.shape[0]:
     st.subheader(f'Since 2002, majority-Black communities in Chicago have received {ratio} times more business\
             licenses than non-Black communities.')
 else:
-    ratio = round(non_black_license_df.shape[0] / black_license_df.shape[0],0).astype(int)
+    ratio = int(round(non_black_license_df.shape[0] / black_license_df.shape[0],0))
     st.subheader(f'Since 2002, majority-Black communities in Chicago have received {ratio} times fewer business\
             licenses than non-Black communities. If you have any thoughts or feelings about this, consider\
             sharing them with the City by following this [link](https://webapps1.chicago.gov/eforms/contactUsForm).')
