@@ -1,21 +1,15 @@
 import streamlit as st
 import pandas as pd
-from gsheetsdb import connect
-
-conn = connect()
-
-@st.cache()
-def run_query(query):
-    rows = conn.execute(query, headers=1)
-    rows = rows.fetchall()
-    return rows
-
-sheet_url = st.secrets["public_gsheets_url"]
-rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 st.title('Business Licenses in Black Chicago')
 
-chi_license_df = pd.DataFrame(rows)
+@st.cache
+def load_data(url):
+    df = pd.read_csv(url)
+    return df
+
+URL = st.secrets["public_gsheets_url"]
+chi_license_df = load_data(URL)
 
 blk_comms = ['AUSTIN','WEST GARFIELD','EAST GARFIELD','NORTH LAWNDALE','DOUGLAS','OAKLAND','FULLER PARK','GRAND BOULEVARD',\
              'KENWOOD','WASHINGTON HEIGHTS','WOODLAWN','SOUTH SHORE','CHATHAM','AVALON PARK','SOUTH CHICAGO','BURNSIDE','CALUMET HEIGHTS',\
